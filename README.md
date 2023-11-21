@@ -4,7 +4,9 @@ An example of PoC implementation of csi driver smb on openshift
 # Disclaimer
 
 **/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
+
 **/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
+
 **/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
 
 # Global information
