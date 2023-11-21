@@ -1,9 +1,11 @@
-# smb csi driver for openshift
+# An implementation of the smb csi driver in Openshift
 An example of PoC implementation of csi driver smb on openshift 
 
 # Disclaimer
 
-**/!\ /!\ /!\ This solution is not supported by Red Hat, this is an example of how it can be done for your needs on ROSA /!\ /!\ /!\\**
+**/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
+**/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
+**/!\ /!\ /!\ This solution is not supported by Red Hat /!\ /!\ /!\\**
 
 # Global information
 This git repository have been highly inspired by [this article](https://rguske.github.io/post/using-windows-smb-shares-in-kubernetes/#3-validating-write-access)
