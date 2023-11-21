@@ -1,0 +1,63 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: smb-server
+  labels:
+    app: smb-server
+spec:
+  type: ClusterIP  # use "LoadBalancer" to get a public ip
+  selector:
+    app: smb-server
+  ports:
+    - port: 445
+      name: smb-server
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: smb-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smb-server
+  template:
+    metadata:
+      name: smb-server
+      labels:
+        app: smb-server
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      serviceAccountName: demo-smb-server
+      # securityContext:
+      #   allowPrivilegeEscalation: true
+      #   runAsUser: 0
+      #   runAsGroup: 0
+      #   fsGroup: 0
+      containers:
+        - name: smb-server
+          image: andyzhangx/samba:win-fix
+          env:
+            - name: PERMISSIONS
+              value: "0777"
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: smbcreds
+                  key: username
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smbcreds
+                  key: password
+          args: ["-u", "$(USERNAME);$(PASSWORD)", "-s", "share;/root/smbshare/;yes;no;no;all;none", "-p"]
+          volumeMounts:
+            - mountPath: /root/smbshare
+              name: data-volume
+          ports:
+            - containerPort: 445
+      volumes:
+        - name: data-volume
+          emptyDir: {}

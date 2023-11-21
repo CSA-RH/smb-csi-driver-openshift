@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: deploy-smb-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      name: deploy-smb-pod
+    spec:
+      # securityContext:
+      #   allowPrivilegeEscalation: true
+      #   runAsUser: 0
+      #   runAsGroup: 0
+      #   fsGroup: 0
+      nodeSelector:
+        "kubernetes.io/os": linux
+      serviceAccountName: test-deploy-smb-pod
+      containers:
+        - name: deploy-smb-pod
+          image: mcr.microsoft.com/oss/nginx/nginx:1.19.5
+          command:
+            - "/bin/bash"
+            - "-c"
+            - set -euo pipefail; while true; do echo $(date) >> /mnt/smb/outfile; sleep 1; done
+          volumeMounts:
+            - name: smb
+              mountPath: "/mnt/smb"
+              readOnly: false
+      volumes:
+        - name: smb
+          persistentVolumeClaim:
+            claimName: pvc-smb
