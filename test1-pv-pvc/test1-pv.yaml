@@ -18,11 +18,13 @@ spec:
     - nofail
     - x-systemd.automount
     - x-systemd.device-timeout
-    - noserverino  # required to prevent data corruption
+    # Required to prevent data corruption
+    - noserverino
   csi:
     driver: smb.csi.k8s.io
     readOnly: false
-    volumeHandle: smb-server.demo-smb-server.svc.cluster.local/share## # make sure it's a unique id in the cluster
+    # Make sure it's a unique id in the cluster
+    volumeHandle: smb-server.demo-smb-server.svc.cluster.local/share##
     volumeAttributes:
       source: "//smb-server.demo-smb-server.svc.cluster.local/share"
     nodeStageSecretRef:

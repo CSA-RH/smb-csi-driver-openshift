@@ -13,16 +13,11 @@ spec:
         app: csi-smb-controller
     spec:
       hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
+      dnsPolicy: ClusterFirstWithHostNet
       serviceAccountName: csi-smb-controller-sa
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-cluster-critical
-      # securityContext:
-      #   privileged: true
-        # runAsUser: 0
-        # runAsGroup: 0
-        # fsGroup: 0
       tolerations:
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"

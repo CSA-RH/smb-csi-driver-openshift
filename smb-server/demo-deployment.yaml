@@ -6,7 +6,7 @@ metadata:
   labels:
     app: smb-server
 spec:
-  type: ClusterIP  # use "LoadBalancer" to get a public ip
+  type: ClusterIP
   selector:
     app: smb-server
   ports:
@@ -31,11 +31,6 @@ spec:
       nodeSelector:
         "kubernetes.io/os": linux
       serviceAccountName: demo-smb-server
-      # securityContext:
-      #   allowPrivilegeEscalation: true
-      #   runAsUser: 0
-      #   runAsGroup: 0
-      #   fsGroup: 0
       containers:
         - name: smb-server
           image: andyzhangx/samba:win-fix

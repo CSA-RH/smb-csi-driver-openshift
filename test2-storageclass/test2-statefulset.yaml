@@ -12,11 +12,6 @@ spec:
       labels:
         app: nginx
     spec:
-      # securityContext:
-      #   runAsUser: 0
-      #   runAsGroup: 0
-      #   fsGroup: 0
-      #   allowPrivilegeEscalation: true
       nodeSelector:
         "kubernetes.io/os": linux
       containers:

@@ -5,8 +5,7 @@ metadata:
 provisioner: smb.csi.k8s.io
 parameters:
   source: "//smb-server.demo-smb-server.svc.cluster.local/share"
-  # if csi.storage.k8s.io/provisioner-secret is provided, will create a sub directory
-  # with PV name under source
+  # if csi.storage.k8s.io/provisioner-secret is provided, will create a sub directory with PV name under source
   csi.storage.k8s.io/provisioner-secret-name: "smbcreds"
   csi.storage.k8s.io/provisioner-secret-namespace: "test-2"
   csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
@@ -16,8 +15,6 @@ volumeBindingMode: Immediate
 mountOptions:
   - dir_mode=0777
   - file_mode=0777
-  - uid=100
-  - gid=101
   - vers=3.0
   - noauto
   - nofail

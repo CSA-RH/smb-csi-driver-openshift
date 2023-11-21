@@ -17,16 +17,11 @@ spec:
         app: csi-smb-node
     spec:
       hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
+      dnsPolicy: ClusterFirstWithHostNet
       serviceAccountName: csi-smb-node-sa
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-node-critical
-      # securityContext:
-      #   allowPrivilegeEscalation: true
-      #   runAsUser: 0
-      #   runAsGroup: 0
-      #   fsGroup: 0
       tolerations:
         - operator: "Exists"
       containers:
